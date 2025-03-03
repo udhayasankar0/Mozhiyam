@@ -87,8 +87,10 @@
     @apply font-tamil font-medium tracking-wide;
   }
 
+  /* Removed the circular dependency here */
+  /* Instead of using @apply font-tamil in .font-tamil */
   .font-tamil {
-    @apply font-tamil;
+    font-family: 'Noto Sans Tamil', sans-serif;
   }
 
   .tamil-text {
