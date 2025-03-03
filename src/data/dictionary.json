@@ -1,0 +1,33 @@
+
+{
+  "featuredTerms": [
+    {
+      "id": "1",
+      "term": "மென்பொருள்",
+      "translation": "Software",
+      "definition": "கணினியின் செயல்பாட்டை நிர்வகிக்கும் நிரல்களின் தொகுப்பு. இது வன்பொருளை இயக்குவதற்கும், பயனர்களுக்கு பயன்பாட்டு வசதிகளை வழங்குவதற்கும் பயன்படுகிறது.",
+      "domain": "Technology"
+    },
+    {
+      "id": "2",
+      "term": "நுண்ணறிவு",
+      "translation": "Intelligence",
+      "definition": "கற்றல், புரிதல், சிக்கல் தீர்த்தல், முடிவெடுத்தல் போன்ற அறிவார்ந்த செயல்பாடுகளில் ஈடுபடும் திறன். இது பல்வேறு சூழல்களில் தகவமைத்துக் கொள்ளும் திறனையும் உள்ளடக்கியது.",
+      "domain": "Psychology"
+    },
+    {
+      "id": "3",
+      "term": "தகவல் தொழில்நுட்பம்",
+      "translation": "Information Technology",
+      "definition": "தகவல்களை சேகரிக்க, சேமிக்க, பகுப்பாய்வு செய்ய மற்றும் பரிமாற்றம் செய்ய பயன்படும் தொழில்நுட்பங்களின் தொகுப்பு. இது கணினிகள், நெட்வொர்க்குகள், மென்பொருள் மற்றும் இதர தொடர்புடைய கருவிகளை உள்ளடக்கியது.",
+      "domain": "Technology"
+    }
+  ],
+  "domains": [
+    { "id": "technology", "name": "Technology", "icon": "Code" },
+    { "id": "medicine", "name": "Medicine", "icon": "Stethoscope" },
+    { "id": "law", "name": "Law", "icon": "Scale" },
+    { "id": "literature", "name": "Literature", "icon": "BookText" },
+    { "id": "arts", "name": "Arts", "icon": "Palette" }
+  ]
+}

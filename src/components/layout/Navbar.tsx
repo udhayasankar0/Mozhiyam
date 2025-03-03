@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Search, BookOpen, Grid3X3 } from 'lucide-react';
+import { Menu, X, BookOpen, Grid3X3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Navbar = () => {
@@ -12,7 +12,7 @@ const Navbar = () => {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link to="/" className="flex items-center gap-2">
-            <span className="text-2xl font-tamil font-bold tracking-tight text-tamil-DEFAULT">
+            <span className="text-2xl font-bold tracking-tight text-tamil-DEFAULT">
               தமிழ்
               <span className="text-tamil-medium">சொற்களஞ்சியம்</span>
             </span>
@@ -39,10 +39,6 @@ const Navbar = () => {
           >
             About
           </Link>
-          <Button variant="outline" size="sm" className="rounded-full">
-            <Search size={16} className="mr-2" />
-            Search
-          </Button>
         </nav>
 
         {/* Mobile Navigation Toggle */}
@@ -84,12 +80,6 @@ const Navbar = () => {
               <BookOpen size={18} className="mr-2" />
               About
             </Link>
-            <div className="pt-2">
-              <Button className="w-full justify-start" variant="outline">
-                <Search size={18} className="mr-2" />
-                Search Dictionary
-              </Button>
-            </div>
           </nav>
         </div>
       )}
