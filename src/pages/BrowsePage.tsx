@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
 import DomainFilter from '@/components/dictionary/DomainFilter';
@@ -81,6 +81,12 @@ const BrowsePage = () => {
   const initialDomain = searchParams.get('domain') || 'all';
   const [selectedDomain, setSelectedDomain] = useState(initialDomain);
   const [searchTerm, setSearchTerm] = useState('');
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  
+  useEffect(() => {
+    // Generate suggestions from all terms
+    setSuggestions(allTerms.map(term => term.term));
+  }, []);
   
   const handleDomainSelect = (domainId: string) => {
     setSelectedDomain(domainId);
@@ -124,6 +130,7 @@ const BrowsePage = () => {
                   <SearchInput 
                     onSearch={handleSearch} 
                     placeholder="Search within results..."
+                    suggestions={suggestions}
                   />
                 </div>
                 
