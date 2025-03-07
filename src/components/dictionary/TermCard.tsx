@@ -11,6 +11,7 @@ interface TermCardProps {
   translation: string;
   definition: string;
   domain: string;
+  audioFile?: string;
   hasAudio?: boolean;
 }
 
@@ -20,6 +21,7 @@ const TermCard: React.FC<TermCardProps> = ({
   translation,
   definition,
   domain,
+  audioFile,
   hasAudio = true
 }) => {
   const [showAudio, setShowAudio] = React.useState(false);
@@ -52,7 +54,7 @@ const TermCard: React.FC<TermCardProps> = ({
         
         {showAudio && (
           <div className="my-3 animate-scale-in">
-            <AudioPlayer term={term} />
+            <AudioPlayer term={term} audioUrl={audioFile} />
           </div>
         )}
         

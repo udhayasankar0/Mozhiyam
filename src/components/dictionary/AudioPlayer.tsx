@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -11,32 +11,49 @@ interface AudioPlayerProps {
 const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, term }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   
-  // In a real implementation, we would have actual audio
-  // For now, let's simulate playing 
   const togglePlay = () => {
-    setIsPlaying(!isPlaying);
+    if (!audioRef.current) return;
     
-    // Simulate audio playing for 2 seconds
-    if (!isPlaying) {
-      setTimeout(() => {
-        setIsPlaying(false);
-      }, 2000);
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play().catch(error => {
+        console.error("Error playing audio:", error);
+      });
     }
+    
+    setIsPlaying(!isPlaying);
   };
 
   const toggleMute = () => {
+    if (!audioRef.current) return;
+    
+    audioRef.current.muted = !isMuted;
     setIsMuted(!isMuted);
+  };
+  
+  const handleAudioEnded = () => {
+    setIsPlaying(false);
   };
 
   return (
     <div className="flex items-center space-x-2 p-2 bg-muted/50 rounded-lg">
+      <audio 
+        ref={audioRef} 
+        src={audioUrl ? `/src/audio/${audioUrl}` : undefined}
+        onEnded={handleAudioEnded}
+        onError={(e) => console.error("Audio error:", e)}
+      />
+      
       <Button
         onClick={togglePlay}
         variant="ghost"
         size="icon"
         className={`h-10 w-10 rounded-full ${isPlaying ? 'text-tamil-DEFAULT bg-tamil-DEFAULT/10' : ''}`}
         aria-label={isPlaying ? "Pause pronunciation" : "Play pronunciation"}
+        disabled={!audioUrl}
       >
         {isPlaying ? <Pause size={18} /> : <Play size={18} />}
       </Button>
@@ -66,6 +83,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, term }) => {
         size="icon"
         className="h-8 w-8 text-neutral-text-medium hover:text-tamil-DEFAULT"
         aria-label={isMuted ? "Unmute" : "Mute"}
+        disabled={!audioUrl}
       >
         {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
       </Button>

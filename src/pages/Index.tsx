@@ -42,6 +42,7 @@ const Index = () => {
                   translation={term.translation}
                   definition={term.definition}
                   domain={term.domain}
+                  audioFile={term.audioFile}
                 />
               ))}
             </div>
