@@ -1,7 +1,6 @@
 
 import React from 'react';
 import Navbar from '@/components/layout/Navbar';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   BookOpen, 
   Languages, 
@@ -28,14 +27,10 @@ const AboutPage = () => {
             </p>
           </div>
           
-          <Tabs defaultValue="features" className="w-full">
-            <TabsList className="w-full max-w-md mx-auto mb-6 flex justify-between">
-              <TabsTrigger value="features" className="flex-1">Features</TabsTrigger>
-              <TabsTrigger value="future" className="flex-1">Future Plans</TabsTrigger>
-              <TabsTrigger value="team" className="flex-1">Our Team</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="features">
+          <div className="space-y-8">
+            {/* Features Section */}
+            <section className="bg-white rounded-xl border border-neutral-border p-6">
+              <h2 className="text-2xl font-bold text-tamil-DEFAULT mb-6">Our Features</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <FeatureCard 
                   icon={<BookOpen className="h-8 w-8 text-tamil-DEFAULT" />}
@@ -58,64 +53,62 @@ const AboutPage = () => {
                   description="Grammar checker, voice-to-text transcription, and offline dictionary support!"
                 />
               </div>
-            </TabsContent>
+            </section>
             
-            <TabsContent value="future">
-              <div className="bg-white rounded-xl border border-neutral-border p-6">
-                <h2 className="text-2xl font-bold text-tamil-DEFAULT mb-6">Our Roadmap</h2>
-                <div className="space-y-6">
-                  <FutureFeature 
-                    icon={<Rocket size={20} />}
-                    title="AI-powered contextual translations"
-                  />
-                  <FutureFeature 
-                    icon={<Rocket size={20} />}
-                    title="Interactive Tamil learning tools"
-                  />
-                  <FutureFeature 
-                    icon={<Rocket size={20} />}
-                    title="Mobile app version"
-                  />
-                  <FutureFeature 
-                    icon={<Rocket size={20} />}
-                    title="Enhanced grammar correction & Tamil writing assistant"
-                  />
-                </div>
+            {/* Future Plans Section */}
+            <section className="bg-white rounded-xl border border-neutral-border p-6">
+              <h2 className="text-2xl font-bold text-tamil-DEFAULT mb-6">Our Roadmap</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <FutureFeature 
+                  icon={<Rocket size={20} />}
+                  title="AI-powered contextual translations"
+                />
+                <FutureFeature 
+                  icon={<Rocket size={20} />}
+                  title="Interactive Tamil learning tools"
+                />
+                <FutureFeature 
+                  icon={<Rocket size={20} />}
+                  title="Mobile app version"
+                />
+                <FutureFeature 
+                  icon={<Rocket size={20} />}
+                  title="Enhanced grammar correction & Tamil writing assistant"
+                />
               </div>
-            </TabsContent>
+            </section>
             
-            <TabsContent value="team">
-              <div className="bg-white rounded-xl border border-neutral-border p-6">
-                <h2 className="text-2xl font-bold text-tamil-DEFAULT mb-6">Meet Our Team</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                  <TeamMember 
-                    name="Udhaya Sankar U"
-                    role="Full-Stack Developer"
-                    description="Focused on building responsive applications."
-                    linkedinUrl="#"
-                  />
-                  <TeamMember 
-                    name="Muthu Pandi"
-                    role="AI Developer"
-                    description="Specializing in AI-powered Tamil text processing."
-                    linkedinUrl="#"
-                  />
-                  <TeamMember 
-                    name="Praveen"
-                    role="Idea Pitcher"
-                    description="Driving innovation with fresh ideas."
-                    linkedinUrl="#"
-                  />
-                  <TeamMember 
-                    name="Ramanathan"
-                    role="Researcher"
-                    description="Ensuring accuracy and linguistic relevance."
-                    linkedinUrl="#"
-                  />
-                </div>
+            {/* Team Section */}
+            <section className="bg-white rounded-xl border border-neutral-border p-6">
+              <h2 className="text-2xl font-bold text-tamil-DEFAULT mb-6">Meet Our Team</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <TeamMember 
+                  name="Udhaya Sankar U"
+                  role="Full-Stack Developer"
+                  description="Focused on building responsive applications."
+                  linkedinUrl="https://www.linkedin.com/in/udhayasankar1/"
+                />
+                <TeamMember 
+                  name="Muthu Pandi M"
+                  role="AI Developer"
+                  description="Specializing in AI-powered Tamil text processing."
+                  linkedinUrl="https://www.linkedin.com/in/mmuthupandi/"
+                />
+                <TeamMember 
+                  name="Praveen M"
+                  role="Idea Pitcher"
+                  description="Driving innovation with fresh ideas."
+                  linkedinUrl="https://www.linkedin.com/in/m-praveen-8489b1321/"
+                />
+                <TeamMember 
+                  name="Ramanathan"
+                  role="Researcher"
+                  description="Ensuring accuracy and linguistic relevance."
+                  linkedinUrl=""
+                />
               </div>
-            </TabsContent>
-          </Tabs>
+            </section>
+          </div>
         </div>
       </main>
       
@@ -195,14 +188,16 @@ const TeamMember = ({ name, role, description, linkedinUrl }: {
         <h3 className="text-lg font-medium text-tamil-DEFAULT mb-1">{name}</h3>
         <p className="text-sm font-medium text-neutral-text-medium mb-2">{role}</p>
         <p className="text-neutral-text-medium text-sm mb-4">{description}</p>
-        <a 
-          href={linkedinUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-tamil-DEFAULT/10 text-tamil-DEFAULT hover:bg-tamil-DEFAULT hover:text-white transition-colors"
-        >
-          <Linkedin size={16} />
-        </a>
+        {linkedinUrl ? (
+          <a 
+            href={linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-tamil-DEFAULT/10 text-tamil-DEFAULT hover:bg-tamil-DEFAULT hover:text-white transition-colors"
+          >
+            <Linkedin size={16} />
+          </a>
+        ) : null}
       </div>
     </div>
   );
