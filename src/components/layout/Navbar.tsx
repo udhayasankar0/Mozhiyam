@@ -1,11 +1,16 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Menu, X, BookOpen, Grid3X3 } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, BookOpen, Languages, FileText, Clock, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const location = useLocation();
+  
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-white/80 backdrop-blur-md">
@@ -23,19 +28,53 @@ const Navbar = () => {
         <nav className="hidden md:flex items-center gap-6">
           <Link 
             to="/" 
-            className="text-sm font-medium text-neutral-text-dark hover:text-tamil-DEFAULT transition-colors"
+            className={`text-sm font-medium ${isActive('/') 
+              ? 'text-tamil-DEFAULT' 
+              : 'text-neutral-text-dark hover:text-tamil-DEFAULT'} transition-colors`}
           >
-            Home
+            <span className="flex items-center gap-1">
+              <Home size={16} />
+              Home
+            </span>
           </Link>
           <Link 
             to="/browse" 
-            className="text-sm font-medium text-neutral-text-dark hover:text-tamil-DEFAULT transition-colors"
+            className={`text-sm font-medium ${isActive('/browse') 
+              ? 'text-tamil-DEFAULT' 
+              : 'text-neutral-text-dark hover:text-tamil-DEFAULT'} transition-colors`}
           >
-            Browse
+            <span className="flex items-center gap-1">
+              <BookOpen size={16} />
+              Dictionary
+            </span>
+          </Link>
+          <Link 
+            to="/translator" 
+            className={`text-sm font-medium ${isActive('/translator') 
+              ? 'text-tamil-DEFAULT' 
+              : 'text-neutral-text-dark hover:text-tamil-DEFAULT'} transition-colors`}
+          >
+            <span className="flex items-center gap-1">
+              <Languages size={16} />
+              Translator
+            </span>
+          </Link>
+          <Link 
+            to="/summarize" 
+            className={`text-sm font-medium ${isActive('/summarize') 
+              ? 'text-tamil-DEFAULT' 
+              : 'text-neutral-text-dark hover:text-tamil-DEFAULT'} transition-colors`}
+          >
+            <span className="flex items-center gap-1">
+              <FileText size={16} />
+              Summarize
+            </span>
           </Link>
           <Link 
             to="/about" 
-            className="text-sm font-medium text-neutral-text-dark hover:text-tamil-DEFAULT transition-colors"
+            className={`text-sm font-medium ${isActive('/about') 
+              ? 'text-tamil-DEFAULT' 
+              : 'text-neutral-text-dark hover:text-tamil-DEFAULT'} transition-colors`}
           >
             About
           </Link>
@@ -58,26 +97,61 @@ const Navbar = () => {
           <nav className="flex flex-col space-y-4">
             <Link 
               to="/" 
-              className="flex items-center p-2 text-neutral-text-dark hover:text-tamil-DEFAULT hover:bg-muted rounded-md transition-colors"
+              className={`flex items-center p-2 ${isActive('/') 
+                ? 'text-tamil-DEFAULT bg-muted' 
+                : 'text-neutral-text-dark hover:text-tamil-DEFAULT hover:bg-muted'} rounded-md transition-colors`}
               onClick={() => setIsMenuOpen(false)}
             >
-              <BookOpen size={18} className="mr-2" />
+              <Home size={18} className="mr-2" />
               Home
             </Link>
             <Link 
               to="/browse" 
-              className="flex items-center p-2 text-neutral-text-dark hover:text-tamil-DEFAULT hover:bg-muted rounded-md transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <Grid3X3 size={18} className="mr-2" />
-              Browse
-            </Link>
-            <Link 
-              to="/about" 
-              className="flex items-center p-2 text-neutral-text-dark hover:text-tamil-DEFAULT hover:bg-muted rounded-md transition-colors"
+              className={`flex items-center p-2 ${isActive('/browse') 
+                ? 'text-tamil-DEFAULT bg-muted' 
+                : 'text-neutral-text-dark hover:text-tamil-DEFAULT hover:bg-muted'} rounded-md transition-colors`}
               onClick={() => setIsMenuOpen(false)}
             >
               <BookOpen size={18} className="mr-2" />
+              Dictionary
+            </Link>
+            <Link 
+              to="/translator" 
+              className={`flex items-center p-2 ${isActive('/translator') 
+                ? 'text-tamil-DEFAULT bg-muted' 
+                : 'text-neutral-text-dark hover:text-tamil-DEFAULT hover:bg-muted'} rounded-md transition-colors`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <Languages size={18} className="mr-2" />
+              Translator
+            </Link>
+            <Link 
+              to="/summarize" 
+              className={`flex items-center p-2 ${isActive('/summarize') 
+                ? 'text-tamil-DEFAULT bg-muted' 
+                : 'text-neutral-text-dark hover:text-tamil-DEFAULT hover:bg-muted'} rounded-md transition-colors`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <FileText size={18} className="mr-2" />
+              Summarize
+            </Link>
+            <Link 
+              to="/coming-soon" 
+              className={`flex items-center p-2 ${isActive('/coming-soon') 
+                ? 'text-tamil-DEFAULT bg-muted' 
+                : 'text-neutral-text-dark hover:text-tamil-DEFAULT hover:bg-muted'} rounded-md transition-colors`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <Clock size={18} className="mr-2" />
+              Coming Soon
+            </Link>
+            <Link 
+              to="/about" 
+              className={`flex items-center p-2 ${isActive('/about') 
+                ? 'text-tamil-DEFAULT bg-muted' 
+                : 'text-neutral-text-dark hover:text-tamil-DEFAULT hover:bg-muted'} rounded-md transition-colors`}
+              onClick={() => setIsMenuOpen(false)}
+            >
               About
             </Link>
           </nav>

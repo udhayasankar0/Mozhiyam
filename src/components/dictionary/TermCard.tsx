@@ -52,7 +52,7 @@ const TermCard: React.FC<TermCardProps> = ({
           )}
         </div>
         
-        {showAudio && (
+        {showAudio && audioFile && (
           <div className="my-3 animate-scale-in">
             <AudioPlayer term={term} audioUrl={audioFile} />
           </div>
