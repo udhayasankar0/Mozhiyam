@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -17,10 +16,10 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 271 81% 28%;
+    --primary: 199 84% 55%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 282 69% 38%;
+    --secondary: 200 84% 59%;
     --secondary-foreground: 210 40% 98%;
 
     --muted: 210 40% 96.1%;
@@ -34,7 +33,7 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 271 81% 28%;
+    --ring: 199 84% 55%;
 
     --radius: 0.75rem;
   }
@@ -49,10 +48,10 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 271 81% 56%;
+    --primary: 199 84% 55%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 282 69% 58%;
+    --secondary: 200 84% 59%;
     --secondary-foreground: 210 40% 98%;
 
     --muted: 217.2 32.6% 17.5%;
@@ -66,7 +65,7 @@
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 271 81% 56%;
+    --ring: 199 84% 55%;
   }
 }
 
@@ -87,8 +86,6 @@
     @apply font-tamil font-medium tracking-wide;
   }
 
-  /* Removed the circular dependency here */
-  /* Instead of using @apply font-tamil in .font-tamil */
   .font-tamil {
     font-family: 'Noto Sans Tamil', sans-serif;
   }
@@ -101,7 +98,6 @@
     @apply font-sans text-neutral-text-medium;
   }
   
-  /* Glass effect */
   .glass {
     @apply bg-glass border border-white/10 backdrop-blur-md backdrop-saturate-150;
   }
@@ -110,12 +106,10 @@
     @apply glass rounded-xl shadow-lg;
   }
   
-  /* Neo-morphism effects */
   .neo-button {
     @apply bg-neutral-background shadow-neo transition-all duration-300 hover:shadow-neo-inner active:shadow-neo-inner;
   }
   
-  /* Animations */
   .animate-enter {
     @apply animate-fade-in;
   }

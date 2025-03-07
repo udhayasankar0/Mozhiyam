@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -54,11 +53,11 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
                 tamil: {
-                    DEFAULT: '#4A148C',     // Deep Purple
-                    medium: '#7B1FA2',      // Medium Purple
-                    light: '#AA00FF',       // Light Purple
-                    accent: '#FFC107',      // Warm Yellow
-                    alert: '#D32F2F',       // Rustic Red
+                    DEFAULT: '#0EA5E9',     // Bright blue instead of Deep Purple
+                    medium: '#0284C7',      // Medium blue instead of Medium Purple
+                    light: '#38BDF8',       // Light blue instead of Light Purple
+                    accent: '#FFC107',      // Keeping the Warm Yellow
+                    alert: '#D32F2F',       // Keeping the Rustic Red
                 },
                 neutral: {
                     background: '#F5F5F5',  // Off-White
