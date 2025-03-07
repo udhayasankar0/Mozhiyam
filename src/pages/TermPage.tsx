@@ -19,6 +19,7 @@ const termData = {
       'He is involved in new software development.'
     ],
     domain: 'Technology',
+    isUserContribution: false,
     relatedTerms: [
       { id: '3', term: 'தகவல் தொழில்நுட்பம்', translation: 'Information Technology' },
       { id: '4', term: 'வன்பொருள்', translation: 'Hardware' }
@@ -37,6 +38,7 @@ const termData = {
       'Artificial intelligence technology has revolutionized many fields.'
     ],
     domain: 'Psychology',
+    isUserContribution: false,
     relatedTerms: [
       { id: '5', term: 'செயற்கை நுண்ணறிவு', translation: 'Artificial Intelligence' },
       { id: '6', term: 'மனவெழுச்சி நுண்ணறிவு', translation: 'Emotional Intelligence' }
@@ -55,6 +57,7 @@ const termData = {
       'The company has upgraded its information technology infrastructure.'
     ],
     domain: 'Technology',
+    isUserContribution: true,
     relatedTerms: [
       { id: '1', term: 'மென்பொருள்', translation: 'Software' },
       { id: '7', term: 'தரவு அறிவியல்', translation: 'Data Science' }
@@ -92,6 +95,7 @@ const TermPage = () => {
           englishExamples={term.englishExamples}
           domain={term.domain}
           relatedTerms={term.relatedTerms}
+          isUserContribution={term.isUserContribution}
         />
       </main>
       

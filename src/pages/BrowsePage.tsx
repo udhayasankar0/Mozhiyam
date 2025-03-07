@@ -5,7 +5,10 @@ import Navbar from '@/components/layout/Navbar';
 import DomainFilter from '@/components/dictionary/DomainFilter';
 import TermCard from '@/components/dictionary/TermCard';
 import SearchInput from '@/components/ui/SearchInput';
-import { Code, Stethoscope, Scale, BookText, Palette } from 'lucide-react';
+import NoResultsFound from '@/components/dictionary/NoResultsFound';
+import AddWordForm from '@/components/dictionary/AddWordForm';
+import { PlusCircle, Code, Stethoscope, Scale, BookText, Palette } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 // Sample data for demonstration
 const allTerms = [
@@ -14,56 +17,64 @@ const allTerms = [
     term: 'மென்பொருள்',
     translation: 'Software',
     definition: 'கணினியின் செயல்பாட்டை நிர்வகிக்கும் நிரல்களின் தொகுப்பு. இது வன்பொருளை இயக்குவதற்கும், பயனர்களுக்கு பயன்பாட்டு வசதிகளை வழங்குவதற்கும் பயன்படுகிறது.',
-    domain: 'technology'
+    domain: 'technology',
+    isUserContribution: false
   },
   {
     id: '2',
     term: 'நுண்ணறிவு',
     translation: 'Intelligence',
     definition: 'கற்றல், புரிதல், சிக்கல் தீர்த்தல், முடிவெடுத்தல் போன்ற அறிவார்ந்த செயல்பாடுகளில் ஈடுபடும் திறன். இது பல்வேறு சூழல்களில் தகவமைத்துக் கொள்ளும் திறனையும் உள்ளடக்கியது.',
-    domain: 'psychology'
+    domain: 'psychology',
+    isUserContribution: false
   },
   {
     id: '3',
     term: 'தகவல் தொழில்நுட்பம்',
     translation: 'Information Technology',
     definition: 'தகவல்களை சேகரிக்க, சேமிக்க, பகுப்பாய்வு செய்ய மற்றும் பரிமாற்றம் செய்ய பயன்படும் தொழில்நுட்பங்களின் தொகுப்பு. இது கணினிகள், நெட்வொர்க்குகள், மென்பொருள் மற்றும் இதர தொடர்புடைய கருவிகளை உள்ளடக்கியது.',
-    domain: 'technology'
+    domain: 'technology',
+    isUserContribution: false
   },
   {
     id: '4',
     term: 'வன்பொருள்',
     translation: 'Hardware',
     definition: 'கணினி அமைப்பின் இயற்பியல் கூறுகள், எ.கா., திரை, விசைப்பலகை, சுட்டி, மற்றும் மதர்போர்டு போன்றவை.',
-    domain: 'technology'
+    domain: 'technology',
+    isUserContribution: false
   },
   {
     id: '5',
     term: 'மருத்துவ நிபுணர்',
     translation: 'Medical Specialist',
     definition: 'ஒரு குறிப்பிட்ட மருத்துவப் பிரிவில் சிறப்பு பயிற்சியும் அனுபவமும் பெற்ற மருத்துவர்.',
-    domain: 'medicine'
+    domain: 'medicine',
+    isUserContribution: true
   },
   {
     id: '6',
     term: 'சட்ட ஆலோசகர்',
     translation: 'Legal Advisor',
     definition: 'சட்ட விஷயங்களில் ஆலோசனை வழங்கும் சட்ட நிபுணர்.',
-    domain: 'law'
+    domain: 'law',
+    isUserContribution: false
   },
   {
     id: '7',
     term: 'கவிதை',
     translation: 'Poetry',
     definition: 'கருத்துக்களையும் உணர்வுகளையும் அழகியல் மொழி மூலம் வெளிப்படுத்தும் இலக்கிய வடிவம்.',
-    domain: 'literature'
+    domain: 'literature',
+    isUserContribution: false
   },
   {
     id: '8',
     term: 'ஓவியம்',
     translation: 'Painting',
     definition: 'துணி, காகிதம், சுவர் போன்ற மேற்பரப்புகளில் வண்ணங்களைப் பயன்படுத்தி உருவாக்கப்படும் கலை வடிவம்.',
-    domain: 'arts'
+    domain: 'arts',
+    isUserContribution: true
   }
 ];
 
@@ -82,6 +93,7 @@ const BrowsePage = () => {
   const [selectedDomain, setSelectedDomain] = useState(initialDomain);
   const [searchTerm, setSearchTerm] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [showAddWordForm, setShowAddWordForm] = useState(false);
   
   useEffect(() => {
     // Generate suggestions from all terms
@@ -114,7 +126,14 @@ const BrowsePage = () => {
       <main className="flex-1 bg-neutral-background py-8">
         <div className="container px-4 md:px-6">
           <div className="flex flex-col gap-6">
-            <h1 className="text-3xl font-bold text-tamil-DEFAULT">Browse Dictionary</h1>
+            <div className="flex justify-between items-center">
+              <h1 className="text-3xl font-bold text-tamil-DEFAULT">Browse Dictionary</h1>
+              
+              <Button onClick={() => setShowAddWordForm(true)}>
+                <PlusCircle size={18} className="mr-2" />
+                Add New Word
+              </Button>
+            </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
               <div className="lg:col-span-1">
@@ -144,16 +163,15 @@ const BrowsePage = () => {
                         translation={term.translation}
                         definition={term.definition}
                         domain={term.domain.charAt(0).toUpperCase() + term.domain.slice(1)}
+                        isUserContribution={term.isUserContribution}
                       />
                     ))}
                   </div>
                 ) : (
-                  <div className="bg-white rounded-xl border border-neutral-border p-8 text-center">
-                    <h3 className="text-xl font-medium mb-2 text-tamil-DEFAULT">No results found</h3>
-                    <p className="text-neutral-text-medium">
-                      Try adjusting your search or filters to find what you're looking for.
-                    </p>
-                  </div>
+                  <NoResultsFound 
+                    searchTerm={searchTerm} 
+                    onAddNewWord={() => setShowAddWordForm(true)} 
+                  />
                 )}
               </div>
             </div>
@@ -181,6 +199,10 @@ const BrowsePage = () => {
           </div>
         </div>
       </footer>
+      
+      {showAddWordForm && (
+        <AddWordForm onClose={() => setShowAddWordForm(false)} />
+      )}
     </div>
   );
 };

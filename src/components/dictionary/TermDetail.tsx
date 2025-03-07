@@ -1,9 +1,11 @@
 
-import React from 'react';
-import { ArrowLeft, ExternalLink, Bookmark, BookmarkCheck } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowLeft, ExternalLink, Bookmark, BookmarkCheck, Flag, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import AudioPlayer from './AudioPlayer';
+import ReportForm from './ReportForm';
+import { toast } from '@/hooks/use-toast';
 
 interface TermDetailProps {
   term: string;
@@ -13,6 +15,7 @@ interface TermDetailProps {
   englishExamples: string[];
   domain: string;
   relatedTerms: { id: string; term: string; translation: string }[];
+  isUserContribution?: boolean;
 }
 
 const TermDetail: React.FC<TermDetailProps> = ({
@@ -22,9 +25,50 @@ const TermDetail: React.FC<TermDetailProps> = ({
   examples,
   englishExamples,
   domain,
-  relatedTerms
+  relatedTerms,
+  isUserContribution = false
 }) => {
-  const [isSaved, setIsSaved] = React.useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  const [showReportForm, setShowReportForm] = useState(false);
+  const [helpfulRating, setHelpfulRating] = useState<'up' | 'down' | null>(null);
+  const [helpfulCount, setHelpfulCount] = useState({ 
+    up: Math.floor(Math.random() * 100) + 20, 
+    down: Math.floor(Math.random() * 15) 
+  });
+  
+  const handleRating = (rating: 'up' | 'down') => {
+    if (helpfulRating === rating) {
+      // User is clicking the same rating again, so remove their rating
+      setHelpfulRating(null);
+      setHelpfulCount(prev => ({
+        ...prev,
+        [rating]: prev[rating] - 1
+      }));
+      toast({
+        description: "Rating removed"
+      });
+    } else {
+      // User is changing their rating or rating for the first time
+      if (helpfulRating) {
+        // If they had a previous rating, decrement that count
+        setHelpfulCount(prev => ({
+          ...prev,
+          [helpfulRating]: prev[helpfulRating] - 1
+        }));
+      }
+      
+      // Set the new rating and increment the count
+      setHelpfulRating(rating);
+      setHelpfulCount(prev => ({
+        ...prev,
+        [rating]: prev[rating] + 1
+      }));
+      
+      toast({
+        description: rating === 'up' ? "Marked as helpful" : "Marked as not helpful"
+      });
+    }
+  };
 
   return (
     <div className="container max-w-4xl mx-auto px-4 py-8 animate-fade-in">
@@ -35,12 +79,18 @@ const TermDetail: React.FC<TermDetailProps> = ({
         </Link>
       </div>
       
-      <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-neutral-border">
+      <div className={`bg-white rounded-xl shadow-lg overflow-hidden border border-neutral-border ${isUserContribution ? 'border-l-4 border-l-amber-400' : ''}`}>
         <div className="p-6 md:p-8">
           <div className="flex flex-wrap gap-2 mb-4">
             <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-tamil-DEFAULT/10 text-tamil-DEFAULT">
               {domain}
             </span>
+            
+            {isUserContribution && (
+              <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-amber-100 text-amber-700">
+                User Contributed
+              </span>
+            )}
           </div>
           
           <div className="flex flex-wrap items-start justify-between gap-4">
@@ -52,10 +102,24 @@ const TermDetail: React.FC<TermDetailProps> = ({
             </div>
             
             <div className="flex space-x-2">
+              <Button
+                variant="outline"
+                onClick={() => setShowReportForm(true)}
+                className="flex items-center gap-1 text-neutral-text-medium hover:text-red-500"
+              >
+                <Flag size={16} />
+                <span className="hidden sm:inline">Report</span>
+              </Button>
+              
               <Button 
                 variant="outline" 
                 className="flex items-center gap-1"
-                onClick={() => setIsSaved(!isSaved)}
+                onClick={() => {
+                  setIsSaved(!isSaved);
+                  toast({
+                    description: isSaved ? "Removed from saved words" : "Added to saved words"
+                  });
+                }}
               >
                 {isSaved ? (
                   <>
@@ -86,10 +150,34 @@ const TermDetail: React.FC<TermDetailProps> = ({
                 <div key={index} className="rounded-lg bg-muted/30 p-4 border border-neutral-border">
                   <p className="font-tamil text-neutral-text-dark">{example}</p>
                   {englishExamples[index] && (
-                    <p className="text-neutral-text-medium text-sm mt-2">{englishExamples[index]}</p>
+                    <p className="text-sm text-neutral-text-medium mt-2">{englishExamples[index]}</p>
                   )}
                 </div>
               ))}
+            </div>
+            
+            <div className="flex items-center gap-3 my-6 p-4 bg-neutral-background rounded-lg">
+              <div className="text-sm font-medium text-neutral-text-dark">Was this helpful?</div>
+              
+              <Button
+                variant="outline"
+                size="sm"
+                className={`flex items-center gap-1 ${helpfulRating === 'up' ? 'bg-green-50 text-green-600 border-green-200' : ''}`}
+                onClick={() => handleRating('up')}
+              >
+                <ThumbsUp size={14} />
+                <span>{helpfulCount.up}</span>
+              </Button>
+              
+              <Button
+                variant="outline"
+                size="sm"
+                className={`flex items-center gap-1 ${helpfulRating === 'down' ? 'bg-red-50 text-red-600 border-red-200' : ''}`}
+                onClick={() => handleRating('down')}
+              >
+                <ThumbsDown size={14} />
+                <span>{helpfulCount.down}</span>
+              </Button>
             </div>
             
             {relatedTerms.length > 0 && (
@@ -115,6 +203,15 @@ const TermDetail: React.FC<TermDetailProps> = ({
           </div>
         </div>
       </div>
+      
+      {showReportForm && (
+        <ReportForm 
+          termId="1" // This would be dynamic in a real implementation
+          term={term}
+          translation={translation}
+          onClose={() => setShowReportForm(false)}
+        />
+      )}
     </div>
   );
 };
