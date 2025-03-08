@@ -3,6 +3,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
 import TermDetail from '@/components/dictionary/TermDetail';
+import { useEffect, useState } from 'react';
+import dictionaryData from '../data/dictionary.json';
 
 // Sample data for demonstration
 const termData = {
@@ -170,7 +172,7 @@ const TermPage = () => {
         <Navbar />
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-tamil-DEFAULT mb-2">Term Not Found</h1>
+            <h1 className="text-2xl font-bold text-green-600 mb-2">Term Not Found</h1>
             <p className="text-neutral-text-medium">The requested term could not be found.</p>
           </div>
         </div>
@@ -201,13 +203,13 @@ const TermPage = () => {
               © 2023 மொழியாம். All rights reserved.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="text-neutral-text-medium hover:text-tamil-DEFAULT text-sm">
+              <a href="#" className="text-neutral-text-medium hover:text-green-600 text-sm">
                 About
               </a>
-              <a href="#" className="text-neutral-text-medium hover:text-tamil-DEFAULT text-sm">
+              <a href="#" className="text-neutral-text-medium hover:text-green-600 text-sm">
                 Privacy
               </a>
-              <a href="#" className="text-neutral-text-medium hover:text-tamil-DEFAULT text-sm">
+              <a href="#" className="text-neutral-text-medium hover:text-green-600 text-sm">
                 Contact
               </a>
             </div>

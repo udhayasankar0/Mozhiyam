@@ -71,6 +71,7 @@
     { "id": "medicine", "name": "Medicine", "icon": "Stethoscope" },
     { "id": "law", "name": "Law", "icon": "Scale" },
     { "id": "literature", "name": "Literature", "icon": "BookText" },
-    { "id": "arts", "name": "Arts", "icon": "Palette" }
+    { "id": "arts", "name": "Arts", "icon": "Palette" },
+    { "id": "psychology", "name": "Psychology", "icon": "Brain" }
   ]
 }
