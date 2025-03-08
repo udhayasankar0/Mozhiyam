@@ -19,96 +19,89 @@ const AboutPage = () => {
       
       <main className="flex-1 py-16 bg-neutral-background">
         <div className="container px-4 md:px-6">
-          <h1 className="text-3xl font-bold text-tamil-DEFAULT mb-3">About மொழியாம்</h1>
+          <h1 className="text-3xl font-bold text-tamil-DEFAULT mb-6">About மொழியாம்</h1>
           
-          <div className="bg-white rounded-xl border border-neutral-border p-6 mb-8">
-            <p className="mb-4 text-neutral-text-dark">
-              மொழியாம் is a digital Tamil language platform that enhances accessibility and understanding of Tamil terminology, translation, and text summarization. Our mission is to bridge Tamil with technology through AI-driven tools.
+          {/* About Section */}
+          <section className="bg-white rounded-xl border border-neutral-border p-6 mb-8">
+            <p className="mb-6 text-neutral-text-dark">
+              மொழியாம் is a comprehensive digital platform dedicated to preserving, promoting, and simplifying Tamil language resources for modern usage. Our mission is to bridge the gap between Tamil and emerging technologies by providing tools that enhance accessibility, learning, and communication.
             </p>
-          </div>
+            
+            <h2 className="text-2xl font-bold text-tamil-DEFAULT mb-4">Our Features</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <FeatureCard 
+                icon={<BookOpen className="h-8 w-8 text-tamil-DEFAULT" />}
+                title="Tamil Terminology Dictionary"
+                description="Find accurate translations, definitions, and examples."
+              />
+              <FeatureCard 
+                icon={<Languages className="h-8 w-8 text-tamil-DEFAULT" />}
+                title="Tamil Translator (English ↔ Tamil)"
+                description="Instant bidirectional translation for seamless communication."
+              />
+              <FeatureCard 
+                icon={<FileText className="h-8 w-8 text-tamil-DEFAULT" />}
+                title="Tamil News Summarization"
+                description="Upload or paste Tamil articles to get a concise AI-generated summary."
+              />
+              <FeatureCard 
+                icon={<Clock className="h-8 w-8 text-tamil-DEFAULT" />}
+                title="Coming Soon"
+                description="Grammar checker, voice-to-text transcription, and offline dictionary support!"
+              />
+            </div>
+            
+            <h2 className="text-2xl font-bold text-tamil-DEFAULT mb-4">Our Roadmap</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FutureFeature 
+                icon={<Rocket size={20} />}
+                title="AI-powered contextual translations"
+              />
+              <FutureFeature 
+                icon={<Rocket size={20} />}
+                title="Interactive Tamil learning tools"
+              />
+              <FutureFeature 
+                icon={<Rocket size={20} />}
+                title="Mobile app version"
+              />
+              <FutureFeature 
+                icon={<Rocket size={20} />}
+                title="Enhanced grammar correction & Tamil writing assistant"
+              />
+            </div>
+          </section>
           
-          <div className="space-y-8">
-            {/* Features Section */}
-            <section className="bg-white rounded-xl border border-neutral-border p-6">
-              <h2 className="text-2xl font-bold text-tamil-DEFAULT mb-6">Our Features</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <FeatureCard 
-                  icon={<BookOpen className="h-8 w-8 text-tamil-DEFAULT" />}
-                  title="Tamil Terminology Dictionary"
-                  description="Find accurate translations, definitions, and examples."
-                />
-                <FeatureCard 
-                  icon={<Languages className="h-8 w-8 text-tamil-DEFAULT" />}
-                  title="Tamil Translator (English ↔ Tamil)"
-                  description="Instant bidirectional translation for seamless communication."
-                />
-                <FeatureCard 
-                  icon={<FileText className="h-8 w-8 text-tamil-DEFAULT" />}
-                  title="Tamil News Summarization"
-                  description="Upload or paste Tamil articles to get a concise AI-generated summary."
-                />
-                <FeatureCard 
-                  icon={<Clock className="h-8 w-8 text-tamil-DEFAULT" />}
-                  title="Coming Soon"
-                  description="Grammar checker, voice-to-text transcription, and offline dictionary support!"
-                />
-              </div>
-            </section>
-            
-            {/* Future Plans Section */}
-            <section className="bg-white rounded-xl border border-neutral-border p-6">
-              <h2 className="text-2xl font-bold text-tamil-DEFAULT mb-6">Our Roadmap</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <FutureFeature 
-                  icon={<Rocket size={20} />}
-                  title="AI-powered contextual translations"
-                />
-                <FutureFeature 
-                  icon={<Rocket size={20} />}
-                  title="Interactive Tamil learning tools"
-                />
-                <FutureFeature 
-                  icon={<Rocket size={20} />}
-                  title="Mobile app version"
-                />
-                <FutureFeature 
-                  icon={<Rocket size={20} />}
-                  title="Enhanced grammar correction & Tamil writing assistant"
-                />
-              </div>
-            </section>
-            
-            {/* Team Section */}
-            <section className="bg-white rounded-xl border border-neutral-border p-6">
-              <h2 className="text-2xl font-bold text-tamil-DEFAULT mb-6">Meet Our Team</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <TeamMember 
-                  name="Udhaya Sankar U"
-                  role="Full-Stack Developer"
-                  description="Focused on building responsive applications."
-                  linkedinUrl="https://www.linkedin.com/in/udhayasankar1/"
-                />
-                <TeamMember 
-                  name="Muthu Pandi M"
-                  role="AI Developer"
-                  description="Specializing in AI-powered Tamil text processing."
-                  linkedinUrl="https://www.linkedin.com/in/mmuthupandi/"
-                />
-                <TeamMember 
-                  name="Praveen M"
-                  role="Idea Pitcher"
-                  description="Driving innovation with fresh ideas."
-                  linkedinUrl="https://www.linkedin.com/in/m-praveen-8489b1321/"
-                />
-                <TeamMember 
-                  name="Ramanathan"
-                  role="Researcher"
-                  description="Ensuring accuracy and linguistic relevance."
-                  linkedinUrl=""
-                />
-              </div>
-            </section>
-          </div>
+          {/* Team Section */}
+          <section className="bg-white rounded-xl border border-neutral-border p-6">
+            <h2 className="text-2xl font-bold text-tamil-DEFAULT mb-6">Meet Our Team</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <TeamMember 
+                name="Udhaya Sankar U"
+                role="Full-Stack Developer"
+                description="Focused on building responsive applications."
+                linkedinUrl="https://www.linkedin.com/in/udhayasankar1/"
+              />
+              <TeamMember 
+                name="Muthu Pandi M"
+                role="AI Developer"
+                description="Specializing in AI-powered Tamil text processing."
+                linkedinUrl="https://www.linkedin.com/in/mmuthupandi/"
+              />
+              <TeamMember 
+                name="Praveen M"
+                role="Idea Pitcher"
+                description="Driving innovation with fresh ideas."
+                linkedinUrl="https://www.linkedin.com/in/m-praveen-8489b1321/"
+              />
+              <TeamMember 
+                name="Ramanathan"
+                role="Researcher"
+                description="Ensuring accuracy and linguistic relevance."
+                linkedinUrl=""
+              />
+            </div>
+          </section>
         </div>
       </main>
       
@@ -116,7 +109,7 @@ const AboutPage = () => {
         <div className="container px-4 md:px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-neutral-text-medium text-sm">
-              © 2023 மொழியாம் (Mozhiyaam). All rights reserved.
+              © 2023 மொழியாம். All rights reserved.
             </p>
             <div className="flex gap-4">
               <a href="#" className="text-neutral-text-medium hover:text-tamil-DEFAULT text-sm">

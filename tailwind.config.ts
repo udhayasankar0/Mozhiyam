@@ -53,9 +53,9 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
                 tamil: {
-                    DEFAULT: '#0EA5E9',     // Bright blue instead of Deep Purple
-                    medium: '#0284C7',      // Medium blue instead of Medium Purple
-                    light: '#38BDF8',       // Light blue instead of Light Purple
+                    DEFAULT: '#10B981',     // Primary green
+                    medium: '#059669',      // Medium green
+                    light: '#34D399',       // Light green
                     accent: '#FFC107',      // Keeping the Warm Yellow
                     alert: '#D32F2F',       // Keeping the Rustic Red
                 },
