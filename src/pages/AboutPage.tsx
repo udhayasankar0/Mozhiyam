@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
 import { 
   BookOpen, 
@@ -13,6 +14,15 @@ import {
 } from 'lucide-react';
 
 const AboutPage = () => {
+  const navigate = useNavigate();
+  
+  const handleFeatureClick = () => {
+    const featuresSection = document.getElementById('features-section');
+    if (featuresSection) {
+      featuresSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -27,7 +37,23 @@ const AboutPage = () => {
               மொழியாம் is a comprehensive digital platform dedicated to preserving, promoting, and simplifying Tamil language resources for modern usage. Our mission is to bridge the gap between Tamil and emerging technologies by providing tools that enhance accessibility, learning, and communication.
             </p>
             
-            <h2 className="text-2xl font-bold text-tamil-DEFAULT mb-4">Our Features</h2>
+            <div className="flex flex-wrap gap-4 mb-6">
+              <button 
+                onClick={handleFeatureClick}
+                className="text-tamil-DEFAULT hover:text-tamil-medium font-medium flex items-center gap-1 transition-colors"
+              >
+                Our Features
+              </button>
+              
+              <Link 
+                to="/about#roadmap" 
+                className="text-tamil-DEFAULT hover:text-tamil-medium font-medium flex items-center gap-1 transition-colors"
+              >
+                Our Roadmap
+              </Link>
+            </div>
+            
+            <h2 id="features-section" className="text-2xl font-bold text-tamil-DEFAULT mb-4">Our Features</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <FeatureCard 
                 icon={<BookOpen className="h-8 w-8 text-tamil-DEFAULT" />}
@@ -51,7 +77,7 @@ const AboutPage = () => {
               />
             </div>
             
-            <h2 className="text-2xl font-bold text-tamil-DEFAULT mb-4">Our Roadmap</h2>
+            <h2 id="roadmap" className="text-2xl font-bold text-tamil-DEFAULT mb-4">Our Roadmap</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FutureFeature 
                 icon={<Rocket size={20} />}

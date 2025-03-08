@@ -62,6 +62,101 @@ const termData = {
       { id: '1', term: 'மென்பொருள்', translation: 'Software' },
       { id: '7', term: 'தரவு அறிவியல்', translation: 'Data Science' }
     ]
+  },
+  '4': {
+    term: 'வன்பொருள்',
+    translation: 'Hardware',
+    definition: 'கணினி அமைப்பின் இயற்பியல் கூறுகள், எ.கா., திரை, விசைப்பலகை, சுட்டி, மற்றும் மதர்போர்டு போன்றவை.',
+    examples: [
+      'வன்பொருள் துறையில் புதிய உற்பத்தி தொழில்நுட்பங்கள் அறிமுகப்படுத்தப்பட்டுள்ளன.',
+      'நிறுவனம் தனது வன்பொருள் உற்பத்தியை விரிவாக்கியுள்ளது.'
+    ],
+    englishExamples: [
+      'New manufacturing technologies are being introduced in the hardware sector.',
+      'The company has expanded its hardware production.'
+    ],
+    domain: 'Technology',
+    isUserContribution: false,
+    relatedTerms: [
+      { id: '1', term: 'மென்பொருள்', translation: 'Software' },
+      { id: '3', term: 'தகவல் தொழில்நுட்பம்', translation: 'Information Technology' }
+    ]
+  },
+  '5': {
+    term: 'மருத்துவ நிபுணர்',
+    translation: 'Medical Specialist',
+    definition: 'ஒரு குறிப்பிட்ட மருத்துவப் பிரிவில் சிறப்பு பயிற்சியும் அனுபவமும் பெற்ற மருத்துவர்.',
+    examples: [
+      'மருத்துவ நிபுணர் துறையில் புதிய சிகிச்சை முறைகள் அறிமுகப்படுத்தப்படுகின்றன.',
+      'மருத்துவ நிபுணரின் ஆலோசனைகள் நோயாளிகளுக்கு மிக முக்கியமானவை.'
+    ],
+    englishExamples: [
+      'New treatment methods are being introduced in the medical specialist field.',
+      'The advice of the medical specialist is extremely valuable for patients.'
+    ],
+    domain: 'Medicine',
+    isUserContribution: true,
+    relatedTerms: [
+      { id: '9', term: 'நோய் அறிவியல்', translation: 'Pathology' },
+      { id: '10', term: 'மருந்தியல்', translation: 'Pharmacology' }
+    ]
+  },
+  '6': {
+    term: 'சட்ட ஆலோசகர்',
+    translation: 'Legal Advisor',
+    definition: 'சட்ட விஷயங்களில் ஆலோசனை வழங்கும் சட்ட நிபுணர்.',
+    examples: [
+      'சட்ட ஆலோசகர் துறையில் புதிய சட்ட மாற்றங்கள் எதிர்பார்க்கப்படுகின்றன.',
+      'நிறுவனம், சட்ட ஆலோசகரின் ஆலோசனைகளை ஏற்று, தனது சட்ட முறைமைகளை மேம்படுத்தியுள்ளது.'
+    ],
+    englishExamples: [
+      'New legal reforms are anticipated in the legal advisory field.',
+      'The company has enhanced its legal procedures by incorporating the legal advisor's recommendations.'
+    ],
+    domain: 'Law',
+    isUserContribution: false,
+    relatedTerms: [
+      { id: '11', term: 'வழக்கறிஞர்', translation: 'Lawyer' },
+      { id: '12', term: 'சட்ட அமலாக்கம்', translation: 'Law Enforcement' }
+    ]
+  },
+  '7': {
+    term: 'கவிதை',
+    translation: 'Poetry',
+    definition: 'கருத்துக்களையும் உணர்வுகளையும் அழகியல் மொழி மூலம் வெளிப்படுத்தும் இலக்கிய வடிவம்.',
+    examples: [
+      'கவிதை உலகில் புதுமையான மற்றும் அழகான படைப்புகள் உருவாகின்றன.',
+      'கவிஞர் தனது உணர்ச்சிகளை கவிதைகளின் வழியாக வெளிப்படுத்துகிறார்.'
+    ],
+    englishExamples: [
+      'Innovative and beautiful poems are emerging in the world of poetry.',
+      'The poet expresses his emotions through his poetry.'
+    ],
+    domain: 'Literature',
+    isUserContribution: false,
+    relatedTerms: [
+      { id: '13', term: 'இலக்கியம்', translation: 'Literature' },
+      { id: '14', term: 'சிறுகதை', translation: 'Short Story' }
+    ]
+  },
+  '8': {
+    term: 'ஓவியம்',
+    translation: 'Painting',
+    definition: 'துணி, காகிதம், சுவர் போன்ற மேற்பரப்புகளில் வண்ணங்களைப் பயன்படுத்தி உருவாக்கப்படும் கலை வடிவம்.',
+    examples: [
+      'ஓவியம் துறையில் கலைஞர்கள் புதிய ஷைல்களை முன்னிலைப்படுத்துகின்றனர்.',
+      'நிறுவனம் ஓவியத்தின் பிரசாரத்திற்காக புதிய கலை நிகழ்ச்சிகளை ஏற்பாடு செய்துள்ளது.'
+    ],
+    englishExamples: [
+      'Artists are showcasing new styles in the field of painting.',
+      'The company has organized new art events to promote painting.'
+    ],
+    domain: 'Arts',
+    isUserContribution: true,
+    relatedTerms: [
+      { id: '15', term: 'கலை', translation: 'Art' },
+      { id: '16', term: 'சிற்பக்கலை', translation: 'Sculpture' }
+    ]
   }
 };
 
@@ -103,7 +198,7 @@ const TermPage = () => {
         <div className="container px-4 md:px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-neutral-text-medium text-sm">
-              © 2023 Tamil Terminology Dictionary. All rights reserved.
+              © 2023 மொழியாம். All rights reserved.
             </p>
             <div className="flex gap-4">
               <a href="#" className="text-neutral-text-medium hover:text-tamil-DEFAULT text-sm">

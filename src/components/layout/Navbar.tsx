@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, BookOpen, Languages, FileText, Clock, Home } from 'lucide-react';
@@ -18,8 +17,7 @@ const Navbar = () => {
         <div className="flex items-center gap-2">
           <Link to="/" className="flex items-center gap-2">
             <span className="text-2xl font-bold tracking-tight text-tamil-DEFAULT">
-              தமிழ்
-              <span className="text-tamil-medium">சொற்களஞ்சியம்</span>
+              மொழியாம்
             </span>
           </Link>
         </div>
