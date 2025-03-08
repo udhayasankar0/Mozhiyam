@@ -23,6 +23,10 @@ const AboutPage = () => {
     }
   };
 
+  const handleFeatureCardClick = (route: string) => {
+    navigate(route);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -34,7 +38,7 @@ const AboutPage = () => {
           {/* About Section */}
           <section className="bg-white rounded-xl border border-neutral-border p-6 mb-8">
             <p className="mb-6 text-neutral-text-dark">
-              மொழியாம் is a comprehensive digital platform dedicated to preserving, promoting, and simplifying Tamil language resources for modern usage. Our mission is to bridge the gap between Tamil and emerging technologies by providing tools that enhance accessibility, learning, and communication.
+              மொழியாம் is a comprehensive digital platform dedicated to preserving, promoting, and simplifying Tamil language resources for modern usage. Our mission is to bridge the gap between Tamil and emerging technologies by providing tools that enhance accessibility, learning, and communication, ensuring that both native speakers and learners can engage with the language seamlessly in the digital age.
             </p>
             
             <div className="flex flex-wrap gap-4 mb-6">
@@ -55,26 +59,34 @@ const AboutPage = () => {
             
             <h2 id="features-section" className="text-2xl font-bold text-tamil-DEFAULT mb-4">Our Features</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <FeatureCard 
-                icon={<BookOpen className="h-8 w-8 text-tamil-DEFAULT" />}
-                title="Tamil Terminology Dictionary"
-                description="Find accurate translations, definitions, and examples."
-              />
-              <FeatureCard 
-                icon={<Languages className="h-8 w-8 text-tamil-DEFAULT" />}
-                title="Tamil Translator (English ↔ Tamil)"
-                description="Instant bidirectional translation for seamless communication."
-              />
-              <FeatureCard 
-                icon={<FileText className="h-8 w-8 text-tamil-DEFAULT" />}
-                title="Tamil News Summarization"
-                description="Upload or paste Tamil articles to get a concise AI-generated summary."
-              />
-              <FeatureCard 
-                icon={<Clock className="h-8 w-8 text-tamil-DEFAULT" />}
-                title="Coming Soon"
-                description="Grammar checker, voice-to-text transcription, and offline dictionary support!"
-              />
+              <div onClick={() => handleFeatureCardClick('/browse')}>
+                <FeatureCard 
+                  icon={<BookOpen className="h-8 w-8 text-tamil-DEFAULT" />}
+                  title="Tamil Terminology Dictionary"
+                  description="Find accurate translations, definitions, and examples."
+                />
+              </div>
+              <div onClick={() => handleFeatureCardClick('/translator')}>
+                <FeatureCard 
+                  icon={<Languages className="h-8 w-8 text-tamil-DEFAULT" />}
+                  title="Tamil Translator (English ↔ Tamil)"
+                  description="Instant bidirectional translation for seamless communication."
+                />
+              </div>
+              <div onClick={() => handleFeatureCardClick('/summarize')}>
+                <FeatureCard 
+                  icon={<FileText className="h-8 w-8 text-tamil-DEFAULT" />}
+                  title="Tamil News Summarization"
+                  description="Upload or paste Tamil articles to get a concise AI-generated summary."
+                />
+              </div>
+              <div onClick={() => handleFeatureCardClick('/coming-soon')}>
+                <FeatureCard 
+                  icon={<Clock className="h-8 w-8 text-tamil-DEFAULT" />}
+                  title="Coming Soon"
+                  description="Grammar checker, voice-to-text transcription, and offline dictionary support!"
+                />
+              </div>
             </div>
             
             <h2 id="roadmap" className="text-2xl font-bold text-tamil-DEFAULT mb-4">Our Roadmap</h2>
@@ -103,25 +115,25 @@ const AboutPage = () => {
             <h2 className="text-2xl font-bold text-tamil-DEFAULT mb-6">Meet Our Team</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <TeamMember 
-                name="Udhaya Sankar U"
+                name="உதய சங்கர் உ"
                 role="Full-Stack Developer"
                 description="Focused on building responsive applications."
                 linkedinUrl="https://www.linkedin.com/in/udhayasankar1/"
               />
               <TeamMember 
-                name="Muthu Pandi M"
+                name="முத்துபாண்டி மு"
                 role="AI Developer"
                 description="Specializing in AI-powered Tamil text processing."
                 linkedinUrl="https://www.linkedin.com/in/mmuthupandi/"
               />
               <TeamMember 
-                name="Praveen M"
+                name="பிரவீன் மு"
                 role="Idea Pitcher"
                 description="Driving innovation with fresh ideas."
                 linkedinUrl="https://www.linkedin.com/in/m-praveen-8489b1321/"
               />
               <TeamMember 
-                name="Ramanathan"
+                name="ராமநாதன் சௌ"
                 role="Researcher"
                 description="Ensuring accuracy and linguistic relevance."
                 linkedinUrl=""
@@ -162,7 +174,7 @@ const FeatureCard = ({ icon, title, description }: {
   description: string 
 }) => {
   return (
-    <div className="bg-white rounded-xl border border-neutral-border p-6 hover:shadow-md transition-all">
+    <div className="bg-white rounded-xl border border-neutral-border p-6 hover:shadow-md transition-all cursor-pointer">
       <div className="flex flex-col items-start">
         <div className="mb-4">
           {icon}
