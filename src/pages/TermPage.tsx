@@ -113,7 +113,7 @@ const termData = {
     ],
     englishExamples: [
       'New legal reforms are anticipated in the legal advisory field.',
-      'The company has enhanced its legal procedures by incorporating the legal advisor's recommendations.'
+      "The company has enhanced its legal procedures by incorporating the legal advisor's recommendations."
     ],
     domain: 'Law',
     isUserContribution: false,
