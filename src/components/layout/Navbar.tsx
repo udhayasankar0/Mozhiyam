@@ -19,11 +19,11 @@ const Navbar = () => {
           <Link to="/" className="flex items-center gap-2">
             <img 
               src="/lovable-uploads/2f760570-b1cd-4475-86df-d88b2ff83ea5.png" 
-              alt="mozhiyam Logo" 
+              alt="மொழியாம் Logo" 
               className="h-8 w-auto" 
             />
             <span className="text-2xl font-bold tracking-tight text-tamil-DEFAULT">
-              mozhiyam
+              மொழியாம்
             </span>
           </Link>
         </div>
