@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, BookOpen, Languages, FileText, Clock, Home } from 'lucide-react';
@@ -16,6 +17,11 @@ const Navbar = () => {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link to="/" className="flex items-center gap-2">
+            <img 
+              src="/lovable-uploads/40fce17b-0da4-43c7-a942-e07b75c1950a.png" 
+              alt="மொழியாம் Logo" 
+              className="h-8 w-auto" 
+            />
             <span className="text-2xl font-bold tracking-tight text-tamil-DEFAULT">
               மொழியாம்
             </span>
