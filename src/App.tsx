@@ -12,6 +12,7 @@ import SummarizePage from "./pages/SummarizePage";
 import ComingSoonPage from "./pages/ComingSoonPage";
 import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
+import WelcomeDialog from "./components/common/WelcomeDialog";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <WelcomeDialog />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/term/:id" element={<TermPage />} />

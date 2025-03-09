@@ -2,6 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 interface AudioPlayerProps {
   audioUrl?: string;
@@ -14,6 +15,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, term }) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   
   const togglePlay = () => {
+    // Show toast notification about the feature being in development
+    toast("This feature is still in development.", {
+      description: "Audio playback functionality will be available in the full version.",
+    });
+    
     if (!audioRef.current) return;
     
     if (isPlaying) {
