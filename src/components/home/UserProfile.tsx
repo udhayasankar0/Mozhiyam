@@ -7,7 +7,7 @@ import UserContributions from './UserContributions';
 const UserProfile = () => {
   // Mock user data - in a real app, this would come from authentication
   const user = {
-    name: 'Guest User',
+    name: 'Prabhakaran',
     avatar: null,
     isLoggedIn: false,
     contributionCount: 0,

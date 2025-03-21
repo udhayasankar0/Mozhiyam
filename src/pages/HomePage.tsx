@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
@@ -77,7 +76,7 @@ const HomePage = () => {
         <div className="container px-4 md:px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-neutral-text-medium text-sm">
-              © 2023 Tamil Language Tools. All rights reserved.
+              © 2025 Tamil Language Tools. All rights reserved.
             </p>
             <div className="flex gap-4">
               <Link to="/about" className="text-neutral-text-medium hover:text-tamil-DEFAULT text-sm">
