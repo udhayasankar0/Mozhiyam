@@ -24,7 +24,7 @@ const INITIAL_POSTS = [
 நேரம் சென்றாலும் என்றும்,
 நெஞ்சில் வாழ்வாய் நீயே! ❤️`,
     author: 'கவிஞர் அமுதன்',
-    type: 'poem',
+    type: 'poem' as const,
     likes: 24,
     comments: [
       { id: 'c1', author: 'ராஜன்', content: 'அருமையான கவிதை! மிகவும் பிடித்திருந்தது.', timestamp: '2 hours ago' },
@@ -46,7 +46,7 @@ const INITIAL_POSTS = [
 மொழி:
 நம் கனவுகள் எதுவாக இருந்தாலும், நம்பிக்கையுடன் முயன்றால் அது நிச்சயமாக நிறைவேறும்! 😊`,
     author: 'செல்வா',
-    type: 'story',
+    type: 'story' as const,
     likes: 45,
     comments: [
       { id: 'c3', author: 'ரமேஷ்', content: 'சிறுகதை மூலம் ஒரு அழகான செய்தியைச் சொல்லியுள்ளீர்கள்.', timestamp: '1 hour ago' }
@@ -55,13 +55,30 @@ const INITIAL_POSTS = [
   }
 ];
 
+// Define the post interface
+interface Post {
+  id: string;
+  title: string;
+  content: string;
+  author: string;
+  type: 'poem' | 'story';
+  likes: number;
+  comments: {
+    id: string;
+    author: string;
+    content: string;
+    timestamp: string;
+  }[];
+  timestamp: string;
+}
+
 const LibraryPage = () => {
-  const [posts, setPosts] = useState(INITIAL_POSTS);
+  const [posts, setPosts] = useState<Post[]>(INITIAL_POSTS);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const { toast } = useToast();
 
-  const handlePostSubmit = (newPost) => {
-    const postWithDetails = {
+  const handlePostSubmit = (newPost: { title: string; content: string; type: 'poem' | 'story' }) => {
+    const postWithDetails: Post = {
       ...newPost,
       id: `post-${Date.now()}`,
       author: 'உங்கள் பெயர்',
