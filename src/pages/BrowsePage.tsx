@@ -183,7 +183,7 @@ const BrowsePage = () => {
         <div className="container px-4 md:px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-neutral-text-medium text-sm">
-              © 2023 Tamil Terminology Dictionary. All rights reserved.
+              © 2025 Tamil Language Tools. All rights reserved.
             </p>
             <div className="flex gap-4">
               <a href="#" className="text-neutral-text-medium hover:text-tamil-DEFAULT text-sm">
