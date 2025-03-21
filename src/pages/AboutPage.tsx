@@ -136,7 +136,7 @@ const AboutPage = () => {
                 name="ராமநாதன் சௌ"
                 role="Researcher"
                 description="Ensuring accuracy and linguistic relevance."
-                linkedinUrl=""
+                linkedinUrl="https://www.linkedin.com/in/ramanathan0/"
               />
             </div>
           </section>
