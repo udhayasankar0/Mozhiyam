@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
-import { Book, BookOpen, Upload, Heart, MessageCircle, Plus, ThumbsUp } from 'lucide-react';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Book, BookOpen, Upload, Heart, MessageCircle, Plus, ThumbsUp, Search, Filter, SortAsc, User } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import LibraryPostCard from '@/components/library/LibraryPostCard';
 import CreatePostDialog from '@/components/library/CreatePostDialog';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 // Mock data for library posts
 const INITIAL_POSTS = [
@@ -51,6 +53,28 @@ const INITIAL_POSTS = [
       { id: 'c3', author: 'ரமேஷ்', content: 'சிறுகதை மூலம் ஒரு அழகான செய்தியைச் சொல்லியுள்ளீர்கள்.', timestamp: '1 hour ago' }
     ],
     timestamp: '2 days ago'
+  },
+  {
+    id: '3',
+    title: 'மழை நாள் 🌧️',
+    content: `மழை பெய்யும் நாளில்
+மனம் குளிர்ந்தது
+மரங்கள் நடனமாடின
+மலர்கள் மகிழ்ந்தன
+மண்ணின் வாசனை
+மனதை நிறைத்தது
+
+நீர் துளிகள் ஜன்னல் வழியே
+நெஞ்சில் இசையெழுப்பின
+நினைவுகள் கரைந்தன
+நேரம் நின்றது`,
+    author: 'Prabhakaran',
+    type: 'poem' as const,
+    likes: 18,
+    comments: [
+      { id: 'c4', author: 'சரவணன்', content: 'மழை நாளின் உணர்வுகளை அழகாக வெளிப்படுத்தியுள்ளீர்கள்!', timestamp: '5 hours ago' }
+    ],
+    timestamp: '1 day ago'
   }
 ];
 
@@ -74,13 +98,26 @@ interface Post {
 const LibraryPage = () => {
   const [posts, setPosts] = useState<Post[]>(INITIAL_POSTS);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [currentFilter, setCurrentFilter] = useState<'all' | 'poem' | 'story'>('all');
+  const [userName, setUserName] = useState('Prabhakaran');
+  const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+
+  useEffect(() => {
+    // Simulate loading data from an API
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   const handlePostSubmit = (newPost: { title: string; content: string; type: 'poem' | 'story' }) => {
     const postWithDetails: Post = {
       ...newPost,
       id: `post-${Date.now()}`,
-      author: 'உங்கள் பெயர்',
+      author: userName,
       likes: 0,
       comments: [],
       timestamp: 'Just now'
@@ -95,20 +132,20 @@ const LibraryPage = () => {
     });
   };
 
-  const handleLike = (postId) => {
+  const handleLike = (postId: string) => {
     setPosts(posts.map(post => 
       post.id === postId ? { ...post, likes: post.likes + 1 } : post
     ));
   };
 
-  const handleAddComment = (postId, commentText) => {
+  const handleAddComment = (postId: string, commentText: string) => {
     if (!commentText.trim()) return;
     
     setPosts(posts.map(post => {
       if (post.id === postId) {
         const newComment = {
           id: `comment-${Date.now()}`,
-          author: 'உங்கள் பெயர்',
+          author: userName,
           content: commentText,
           timestamp: 'Just now'
         };
@@ -125,6 +162,18 @@ const LibraryPage = () => {
     });
   };
 
+  const filteredPosts = posts.filter(post => {
+    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                           post.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                           post.author.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    const matchesFilter = currentFilter === 'all' || post.type === currentFilter;
+    
+    return matchesSearch && matchesFilter;
+  });
+
+  const featuredPosts = [...posts].sort((a, b) => b.likes - a.likes).slice(0, 3);
+  
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -142,26 +191,138 @@ const LibraryPage = () => {
               </p>
             </div>
             
-            <Button 
-              onClick={() => setIsCreateDialogOpen(true)}
-              className="mt-4 md:mt-0 flex items-center gap-2"
-            >
-              <Plus size={16} />
-              புதிய படைப்பு சேர்க்க
-            </Button>
+            <div className="flex gap-4 mt-4 md:mt-0">
+              <div className="relative w-64">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-text-medium" />
+                <Input
+                  placeholder="தேடுங்கள்..."
+                  className="pl-9"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+              
+              <Button 
+                onClick={() => setIsCreateDialogOpen(true)}
+                className="flex items-center gap-2"
+              >
+                <Plus size={16} />
+                புதிய படைப்பு
+              </Button>
+            </div>
           </div>
 
-          {/* Content */}
-          <div className="space-y-6">
-            {posts.map(post => (
-              <LibraryPostCard
-                key={post.id}
-                post={post}
-                onLike={() => handleLike(post.id)}
-                onAddComment={(comment) => handleAddComment(post.id, comment)}
-              />
-            ))}
+          {/* User Profile Banner */}
+          <div className="mb-8 p-6 bg-white rounded-lg shadow-sm border border-neutral-border">
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-tamil-DEFAULT/10 flex items-center justify-center text-tamil-DEFAULT">
+                <User size={32} />
+              </div>
+              <div>
+                <h2 className="text-xl font-semibold">{userName}</h2>
+                <p className="text-neutral-text-medium">3 படைப்புகள் · 67 விருப்பங்கள் பெற்றவை</p>
+              </div>
+            </div>
           </div>
+
+          <Tabs defaultValue="all" className="mb-8">
+            <div className="flex justify-between items-center">
+              <TabsList>
+                <TabsTrigger value="all" onClick={() => setCurrentFilter('all')}>
+                  அனைத்தும்
+                </TabsTrigger>
+                <TabsTrigger value="poem" onClick={() => setCurrentFilter('poem')}>
+                  <BookOpen size={14} className="mr-1" />
+                  கவிதைகள்
+                </TabsTrigger>
+                <TabsTrigger value="story" onClick={() => setCurrentFilter('story')}>
+                  <Book size={14} className="mr-1" />
+                  சிறுகதைகள்
+                </TabsTrigger>
+              </TabsList>
+              
+              <div className="flex items-center gap-2">
+                <Button variant="ghost" size="sm" className="text-neutral-text-medium">
+                  <SortAsc size={16} className="mr-1" />
+                  சமீபத்தியவை
+                </Button>
+              </div>
+            </div>
+          </Tabs>
+
+          {/* Featured Section */}
+          {currentFilter === 'all' && searchQuery === '' && (
+            <div className="mb-8">
+              <h2 className="text-xl font-semibold mb-4 flex items-center">
+                <Heart size={18} className="mr-2 text-tamil-DEFAULT" />
+                சிறந்த படைப்புகள்
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {featuredPosts.map(post => (
+                  <div key={post.id} className="bg-white p-4 rounded-lg border border-neutral-border shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex items-center gap-2 mb-2">
+                      {post.type === 'poem' ? (
+                        <BookOpen size={14} className="text-tamil-medium" />
+                      ) : (
+                        <Book size={14} className="text-tamil-light" />
+                      )}
+                      <span className="text-xs font-medium text-neutral-text-medium">
+                        {post.type === 'poem' ? 'கவிதை' : 'சிறுகதை'}
+                      </span>
+                    </div>
+                    <h3 className="font-bold text-tamil-DEFAULT mb-1">{post.title}</h3>
+                    <p className="text-sm text-neutral-text-medium mb-2">{post.author}</p>
+                    <p className="text-sm line-clamp-3 mb-3">{post.content.substring(0, 120)}...</p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <ThumbsUp size={14} className="text-tamil-DEFAULT" />
+                        <span className="text-sm">{post.likes}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <MessageCircle size={14} className="text-neutral-text-medium" />
+                        <span className="text-sm">{post.comments.length}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Skeleton loader */}
+          {loading ? (
+            <div className="space-y-6">
+              {[1, 2, 3].map(i => (
+                <div key={i} className="rounded-lg border border-neutral-border bg-white p-6 animate-pulse">
+                  <div className="h-6 bg-neutral-background rounded w-1/3 mb-4"></div>
+                  <div className="h-4 bg-neutral-background rounded w-1/4 mb-8"></div>
+                  <div className="space-y-2">
+                    <div className="h-3 bg-neutral-background rounded"></div>
+                    <div className="h-3 bg-neutral-background rounded"></div>
+                    <div className="h-3 bg-neutral-background rounded w-4/5"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : filteredPosts.length > 0 ? (
+            <ScrollArea className="h-[calc(100vh-350px)]">
+              <div className="space-y-6 pr-4">
+                {filteredPosts.map(post => (
+                  <LibraryPostCard
+                    key={post.id}
+                    post={post}
+                    onLike={() => handleLike(post.id)}
+                    onAddComment={(comment) => handleAddComment(post.id, comment)}
+                  />
+                ))}
+              </div>
+            </ScrollArea>
+          ) : (
+            <div className="text-center py-10">
+              <p className="text-lg font-medium">எந்த படைப்புகளும் கிடைக்கவில்லை</p>
+              <p className="text-neutral-text-medium mt-2">தேடலுக்கு பொருந்தும் படைப்புகள் இல்லை. வேறு தேடல் சொற்களை முயற்சிக்கவும்.</p>
+            </div>
+          )}
         </div>
       </main>
       
