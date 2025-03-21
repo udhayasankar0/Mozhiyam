@@ -11,6 +11,7 @@ import TranslatorPage from "./pages/TranslatorPage";
 import SummarizePage from "./pages/SummarizePage";
 import ComingSoonPage from "./pages/ComingSoonPage";
 import AboutPage from "./pages/AboutPage";
+import LibraryPage from "./pages/LibraryPage";
 import NotFound from "./pages/NotFound";
 import WelcomeDialog from "./components/common/WelcomeDialog";
 
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/browse" element={<BrowsePage />} />
           <Route path="/translator" element={<TranslatorPage />} />
           <Route path="/summarize" element={<SummarizePage />} />
+          <Route path="/library" element={<LibraryPage />} />
           <Route path="/coming-soon" element={<ComingSoonPage />} />
           <Route path="/about" element={<AboutPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

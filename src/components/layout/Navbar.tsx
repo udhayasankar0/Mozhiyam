@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, BookOpen, Languages, FileText, Clock, Home } from 'lucide-react';
+import { Menu, X, BookOpen, Languages, FileText, Clock, Home, Book } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Navbar = () => {
@@ -75,6 +75,17 @@ const Navbar = () => {
             </span>
           </Link>
           <Link 
+            to="/library" 
+            className={`text-sm font-medium ${isActive('/library') 
+              ? 'text-tamil-DEFAULT' 
+              : 'text-neutral-text-dark hover:text-tamil-DEFAULT'} transition-colors`}
+          >
+            <span className="flex items-center gap-1">
+              <Book size={16} />
+              நூலகம்
+            </span>
+          </Link>
+          <Link 
             to="/about" 
             className={`text-sm font-medium ${isActive('/about') 
               ? 'text-tamil-DEFAULT' 
@@ -138,6 +149,16 @@ const Navbar = () => {
             >
               <FileText size={18} className="mr-2" />
               Summarize
+            </Link>
+            <Link 
+              to="/library" 
+              className={`flex items-center p-2 ${isActive('/library') 
+                ? 'text-tamil-DEFAULT bg-muted' 
+                : 'text-neutral-text-dark hover:text-tamil-DEFAULT hover:bg-muted'} rounded-md transition-colors`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <Book size={18} className="mr-2" />
+              நூலகம் (Library)
             </Link>
             <Link 
               to="/coming-soon" 
