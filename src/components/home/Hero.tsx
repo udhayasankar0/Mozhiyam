@@ -1,7 +1,9 @@
 
 import React from 'react';
 import SearchInput from '@/components/ui/SearchInput';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Book } from 'lucide-react';
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -29,6 +31,15 @@ const Hero = () => {
             onSearch={handleSearch} 
             placeholder="நீங்கள் தேடும் சொல்... / Search for a term..."
           />
+        </div>
+        
+        <div className="flex flex-wrap justify-center gap-4 mt-8">
+          <Link to="/library">
+            <Button className="bg-tamil-DEFAULT hover:bg-tamil-DEFAULT/90 text-white">
+              <Book size={18} />
+              நூலகம் (Library)
+            </Button>
+          </Link>
         </div>
         
         <div className="flex flex-wrap justify-center gap-3 mt-8">
