@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
@@ -22,9 +23,12 @@ const HomePage = () => {
             
             {/* Main content area with feature cards */}
             <div className="w-full md:w-3/4">
-              <h1 className="text-3xl font-bold text-tamil-DEFAULT mb-6">
+              <h1 className="text-3xl font-bold text-tamil-DEFAULT mb-2">
                 Tamil Language Tools
               </h1>
+              <h2 className="text-xl font-semibold text-tamil-DEFAULT/80 mb-6 font-tamil">
+                நூலகம்
+              </h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Dictionary Card */}
